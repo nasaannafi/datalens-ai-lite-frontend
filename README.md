@@ -1,40 +1,38 @@
-# DataLens AI Lite — Frontend MVP
+# DataLens AI Lite — Frontend
 
-Frontend awal Sehat Jatim menggunakan React, Vite, JavaScript, Leaflet, React-Leaflet, Recharts, dan CSS.
+Frontend MVP untuk project Sehat Jatim menggunakan React + Vite.
 
-## Status data
-- Semua angka dalam `src/data/demoData.js` adalah data sintetis untuk demo UI, bukan statistik resmi Jawa Timur.
-- Titik peta hanya ilustrasi lokasi kota, bukan lokasi fasilitas kesehatan atau batas administrasi resmi.
-- Insight dihitung lokal dari data demo. AI generatif dan FastAPI belum terhubung.
-- Basemap OpenStreetMap membutuhkan koneksi internet.
-
-## Menjalankan
-Prasyarat: Node.js 18+ dan npm.
+## Menjalankan secara lokal
 
 ```bash
 npm install
 npm run dev
 ```
 
-Buka URL lokal yang ditampilkan Vite, biasanya http://localhost:5173.
+Untuk membuat build produksi:
 
-## Uji build
 ```bash
 npm run build
-npm run preview
 ```
 
-## Struktur
-- `src/components/`: komponen UI modular
-- `src/data/demoData.js`: data contoh
-- `src/services/dashboardService.js`: lapisan transformasi data
-- `src/App.jsx`: state dan susunan dashboard
-- `src/styles.css`: desain responsif
+## Status implementasi
 
-## Integrasi selanjutnya
-1. Validasi kolom CSV latihan.
-2. Hitung statistik dengan kode dan uji hasilnya.
-3. Tambahkan endpoint FastAPI lalu sambungkan melalui service.
-4. Cocokkan kode/nama wilayah dengan GeoJSON dari sumber terverifikasi.
-5. Ganti titik ilustratif dengan batas wilayah yang faktual.
-6. Simpan API key hanya di backend, bukan frontend.
+- Dashboard bergaya navy/biru sesuai referensi prototipe.
+- Kartu statistik, daftar wilayah, detail wilayah, grafik perbandingan, dan panel insight.
+- Peta Leaflet dengan marker ilustratif untuk interaksi UI.
+- Dataset saat ini masih berupa data sintetis dari `src/data/demoData.js`.
+- Marker bukan koordinat fasilitas dan peta belum menggunakan batas administrasi GeoJSON resmi.
+- AI generatif belum terhubung; insight adalah ringkasan deskriptif lokal atas data demo.
+- Tahun dan indikator pada header saat ini adalah kontrol UI untuk prototipe, bukan pemilih data historis yang terhubung ke dataset.
+
+## Catatan data
+
+Angka dan lokasi demo tidak boleh ditafsirkan sebagai statistik resmi Puskesmas Jawa Timur. Sebelum rilis publik, ganti data demo dengan sumber terverifikasi, cocokkan nama/kode wilayah, lalu gunakan GeoJSON administrasi yang dapat dipertanggungjawabkan.
+
+## Struktur
+
+- `src/App.jsx`: komposisi dashboard
+- `src/components/`: sidebar, header, kartu statistik, peta, grafik, dan insight
+- `src/data/demoData.js`: data latihan sintetis
+- `src/services/dashboardService.js`: transformasi data dashboard
+- `src/styles.css`: tema responsif navy/biru

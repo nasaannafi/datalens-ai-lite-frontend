@@ -1,10 +1,10 @@
-import { BrainCircuit,Sparkles,ShieldAlert } from "lucide-react";
+import { BrainCircuit, Sparkles, ShieldAlert, RefreshCw, Bot } from "lucide-react";
 export default function AIInsights({regions}) {
- const highest=[...regions].sort((a,b)=>b.puskesmas-a.puskesmas)[0],lowest=[...regions].sort((a,b)=>a.puskesmas-b.puskesmas)[0];
- return <section className="panel insights-panel"><div className="panel-heading"><div><div className="panel-title"><BrainCircuit size={18}/>AI Insights</div><p className="panel-subtitle">Ringkasan berbasis angka yang tersedia</p></div><span className="ai-pill"><Sparkles size={12}/>PREVIEW</span></div>
- <div className="insight-intro"><span className="insight-spark"><Sparkles size={17}/></span><div><strong>Ikhtisar eksplorasi</strong><p>Ringkasan deskriptif data contoh, bukan kesimpulan layanan kesehatan.</p></div></div>
- <div className="insight-item"><span className="insight-number">01</span><div><strong>{highest?.name??"Belum ada data"}</strong><p>{highest?`Nilai fasilitas tertinggi pada subset demo (${highest.puskesmas}).`:"Data wilayah belum tersedia."}</p></div></div>
- <div className="insight-item"><span className="insight-number">02</span><div><strong>{lowest?.name??"Belum ada data"}</strong><p>{lowest?`Nilai fasilitas terendah pada subset demo (${lowest.puskesmas}); bukan indikator kecukupan layanan.`:"Data wilayah belum tersedia."}</p></div></div>
- <div className="insight-disclaimer"><ShieldAlert size={16}/><span>Insight dihitung lokal dari data sintetis. AI generatif belum terhubung.</span></div>
- <button className="generate-button" onClick={()=>window.alert("AI belum terhubung. Hubungkan endpoint FastAPI setelah statistik terverifikasi.")}><Sparkles size={16}/>Generate insight <span>↗</span></button></section>;
+  const highest = [...regions].sort((a,b)=>b.puskesmas-a.puskesmas)[0];
+  const lowest = [...regions].sort((a,b)=>a.puskesmas-b.puskesmas)[0];
+  return <section className="panel insights-panel"><div className="panel-heading"><div><div className="panel-title"><Sparkles size={19}/>AI Insights <span className="beta-pill">Beta</span></div></div><button className="reanalyze-button" onClick={()=>window.alert("Insight demo diperbarui dari data sintetis lokal. Integrasi AI belum tersedia.")}><RefreshCw size={12}/> Analisis ulang</button></div>
+    <div className="insight-intro"><span className="insight-spark"><Bot size={22}/></span><div><strong>Ringkasan Analisis</strong><p>{highest && lowest ? `Dalam subset data latihan ini, ${highest.name} memiliki nilai jumlah Puskesmas tertinggi (${highest.puskesmas}), sedangkan ${lowest.name} memiliki nilai terendah (${lowest.puskesmas}). Perbandingan ini bersifat deskriptif dan tidak menunjukkan kecukupan layanan.` : "Belum ada data wilayah yang dapat diringkas."}</p></div></div>
+    <div className="insight-disclaimer"><ShieldAlert size={14}/><span>Insight berdasarkan data latihan sintetis, bukan data resmi atau rekomendasi medis.</span></div>
+    <div className="insight-actions"><button onClick={()=>window.alert("Analisis ini hanya membandingkan nilai data demo. Belum ada indikator rasio penduduk atau standar layanan.")}>Mana wilayah dengan nilai tertinggi?</button><button onClick={()=>window.alert("Perbandingan 5 wilayah teratas dihitung dari subset data demo.")}>Bandingkan 5 wilayah teratas</button></div>
+  </section>;
 }
